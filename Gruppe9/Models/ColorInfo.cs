@@ -4,10 +4,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Gruppe9.Models;
 
-    public class PollenResponse
-    {
-        public int ID { get; set; } //Primary Key
-        public int DateInfoId { get; set; }
-        public int PlantInfoId { get; set; }
-
+public class ColorInfo
+{
+    public int ID { get; set; } //Primary Key
+    [Required]
+    public float Red { get; set; }
+    public float Green { get; set; }
+    public float Blue { get; set; }
 }
