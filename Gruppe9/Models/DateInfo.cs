@@ -1,22 +1,18 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Gruppe9.Models
-
 {
     public class DateInfo
     {
-        public int id { get; set; }
+        [Key]
+        public int Id { get; set; }
 
         [Required]
-        public int year { get; set; }
+        public DateTime Dato { get; set; }
 
-        [Required]
-        public int month { get; set; }
-        
-        [Required]
-        public int day { get; set; }
-        
-        
+        // Navigasjon til alle responses på denne datoen
+        public ICollection<PollenResponse>? PollenResponses { get; set; }
     }
 }

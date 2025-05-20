@@ -5,22 +5,17 @@ namespace Gruppe9.Models
 {
     public class PollenRegistrering
     {
-
-        // Primær nøkkel
-        public int ID { get; set; }
-
-        //Dato må være required siden det er snakk om registrering
-        [Required]
-        public DateTime date { get; set; }
+        [Key]
+        public int Id { get; set; }
 
         [Required]
-        [StringLength(50, ErrorMessage = "Type of pollen can be at most 50 characters long.")]
-        public String? TypeOfPollen { get; set; }
+        public DateTime Date { get; set; }
 
         [Required]
-        public int? Level { get; set; }
+        [StringLength(50)]
+        public string? TypeOfPollen { get; set; }
 
-        
-
+        [Required]
+        public int Level { get; set; }
     }
 }

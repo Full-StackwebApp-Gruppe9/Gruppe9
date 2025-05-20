@@ -1,14 +1,19 @@
-using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Gruppe9.Models;
-
-public class ColorInfo
+namespace Gruppe9.Models
 {
-    public int ID { get; set; } //Primary Key
-    [Required]
-    public float Red { get; set; }
-    public float Green { get; set; }
-    public float Blue { get; set; }
+    public class ColorInfo
+    {
+        [Key]
+        public int Id { get; set; }
+
+        [Range(0, 255)]
+        public int Red { get; set; }
+
+        [Range(0, 255)]
+        public int Green { get; set; }
+
+        [Range(0, 255)]
+        public int Blue { get; set; }
+    }
 }
