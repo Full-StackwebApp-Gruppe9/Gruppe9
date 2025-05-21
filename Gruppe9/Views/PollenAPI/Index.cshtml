@@ -16,10 +16,11 @@
     <p><strong>Antall rader i databasen:</strong> @ViewBag.Antall</p>
 }
 
-<table class="table table-bordered table-dark">
+<table class="table table-bordered table-light">
     <thead>
         <tr>
             <th>ID</th>
+            <th>Dato</th>
             <th>Code</th>
             <th>DisplayName</th>
             <th>Value</th>
@@ -33,6 +34,7 @@
         {
             <tr>
                 <td>@index.ID</td>
+                <td>@index.Date</td>
                 <td>@index.Code</td>
                 <td>@index.DisplayName</td>
                 <td>@index.Value</td>

@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Gruppe9.Converters;
 
 namespace Gruppe9.Models
 {
@@ -11,7 +12,8 @@ namespace Gruppe9.Models
     public class ApiDateInfo
     {
         [JsonPropertyName("date")]
-        public string Date { get; set; }
+        [JsonConverter(typeof(DateOnlyConverter))]
+        public string? Date { get; set; }
 
         [JsonPropertyName("indexes")]
         public List<ApiIndexInfo> Indexes { get; set; } = new();

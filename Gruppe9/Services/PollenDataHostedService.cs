@@ -26,45 +26,54 @@ namespace Gruppe9.Services
 
             var data = await pollenService.HentPollenDataAsync();
 
-            if (data != null)
+            if (data == null)
             {
-                foreach (var day in data.DailyInfo)
-                {
-                    foreach (var index in day.Indexes)
-                    {
-                        var color = index.Value switch
-                        {
-                            <= 2 => new ColorInfo { Red = 0, Green = 200, Blue = 0 },
-                            <= 4 => new ColorInfo { Red = 255, Green = 255, Blue = 0 },
-                            _ => new ColorInfo { Red = 255, Green = 0, Blue = 0 }
-                        };
-
-                        var existingColor = context.ColorInfo.FirstOrDefault(c =>
-                            c.Red == color.Red && c.Green == color.Green && c.Blue == color.Blue);
-
-                        if (existingColor == null)
-                        {
-                            context.ColorInfo.Add(color);
-                            await context.SaveChangesAsync();
-                            existingColor = color;
-                        }
-
-                        var indexInfo = new IndexInfo
-                        {
-                            Code = index.Code,
-                            DisplayName = index.DisplayName,
-                            Value = index.Value,
-                            Category = index.Category,
-                            IndexDescription = index.IndexDescription,
-                            ColorInfoId = existingColor.Id
-                        };
-
-                        context.IndexInfo.Add(indexInfo);
-                    }
-                }
-
-                await context.SaveChangesAsync();
+                Console.WriteLine("⚠️  API-respons var null – ingen data hentet.");
+                return;
             }
+
+            Console.WriteLine($"✅ API-data mottatt: {data.DailyInfo.Count} dager");
+
+            foreach (var day in data.DailyInfo)
+            {
+                string dato = day.Date ?? "Ukjent";
+
+                foreach (var index in day.Indexes)
+                {
+                    var color = index.Value switch
+                    {
+                        <= 2 => new ColorInfo { Red = 0, Green = 200, Blue = 0 },
+                        <= 4 => new ColorInfo { Red = 255, Green = 255, Blue = 0 },
+                        _ => new ColorInfo { Red = 255, Green = 0, Blue = 0 }
+                    };
+
+                    var existingColor = context.ColorInfo.FirstOrDefault(c =>
+                        c.Red == color.Red && c.Green == color.Green && c.Blue == color.Blue);
+
+                    if (existingColor == null)
+                    {
+                        context.ColorInfo.Add(color);
+                        await context.SaveChangesAsync();
+                        existingColor = color;
+                    }
+
+                    var indexInfo = new IndexInfo
+                    {
+                        Code = index.Code,
+                        DisplayName = index.DisplayName,
+                        Value = index.Value,
+                        Category = index.Category,
+                        IndexDescription = index.IndexDescription,
+                        ColorInfoId = existingColor.Id,
+                        Date = dato // ✅ legg til dato
+                    };
+
+                    context.IndexInfo.Add(indexInfo);
+                }
+            }
+
+            await context.SaveChangesAsync();
+            Console.WriteLine("✅ Pollen-data lagret i databasen!");
         }
 
         public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
