@@ -44,15 +44,16 @@ namespace Gruppe9.Services
             foreach (var day in data.DailyInfo)
             {
                 string dato = day.Date ?? "Ukjent";
-                int antallIndexes = day.Indexes?.Count ?? 0;
+                int antallPlanter = day.PlantInfo?.Count ?? 0;
 
-                Console.WriteLine($"📅 Dato: {dato}, antall indexes: {antallIndexes}");
+                Console.WriteLine($"📅 Dato: {dato}, antall planter: {antallPlanter}");
 
-                foreach (var index in day.Indexes)
+                foreach (var plant in day.PlantInfo)
                 {
-                    if (string.IsNullOrWhiteSpace(index.Code)) continue;
+                    var index = plant.IndexInfo;
+                    if (index == null) continue;
 
-                    Console.WriteLine($"🌿 {index.Code} – {index.DisplayName} – {index.Value}");
+                    Console.WriteLine($"🌿 {plant.Code} – {plant.DisplayName} – {index.Value}");
 
                     var color = index.Value switch
                     {
@@ -73,8 +74,8 @@ namespace Gruppe9.Services
 
                     var indexInfo = new IndexInfo
                     {
-                        Code = index.Code,
-                        DisplayName = index.DisplayName,
+                        Code = plant.Code,
+                        DisplayName = plant.DisplayName,
                         Value = index.Value,
                         Category = index.Category,
                         IndexDescription = index.IndexDescription,
@@ -83,7 +84,7 @@ namespace Gruppe9.Services
                     };
 
                     context.IndexInfo.Add(indexInfo);
-                    Console.WriteLine($"➕ Lagret pollen: {index.Code} ({index.DisplayName}) - {index.Value} - {dato}");
+                    Console.WriteLine($"➕ Lagret pollen: {plant.Code} ({plant.DisplayName}) - {index.Value} - {dato}");
                     antallLagret++;
                 }
             }
