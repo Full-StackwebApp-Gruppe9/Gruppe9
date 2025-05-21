@@ -1,8 +1,15 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Hjem";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Eksamen - TSD2491: Gruppe(9) web applikasjon</h1>
-    <p>Velkommen til lokalt varsel for pollenspredningen</p>
+    <h1 class="display-4">Velkommen til Gruppe 9s applikasjon</h1>
+    <p>Dette er startsiden for eksamensoppgaven i TSD2491.</p>
+
+    <div class="mt-4">
+       
+        <a asp-controller="PollenAPI" asp-action="Index" class="btn btn-outline-success">
+            Gå til pollenvarsel
+        </a>
+    </div>
 </div>

@@ -29,7 +29,7 @@
                 <td>@item.Value</td>
                 <td>@item.Category</td>
                 <td>@item.IndexDescription</td>
-                <td style="background-color: rgb(@item.ColorInfo.Red, @item.ColorInfo.Green, @item.ColorInfo.Blue); width: 80px;">
+                <td style="background-color: rgb(@item.ColorInfo?.Red, @item.ColorInfo?.Green, @item.ColorInfo?.Blue); width: 80px;">
                 </td>
             </tr>
         }
