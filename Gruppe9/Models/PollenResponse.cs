@@ -6,7 +6,7 @@ namespace Gruppe9.Models
     public class PollenResponse
     {
         [Key]
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         // FK til DateInfo
         public int DateInfoId { get; set; }

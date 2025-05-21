@@ -7,7 +7,7 @@ namespace Gruppe9.Models
     public class DateInfo
     {
         [Key]
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         [Required]
         public int Year { get; set; }

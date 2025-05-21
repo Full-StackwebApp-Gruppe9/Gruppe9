@@ -16,7 +16,7 @@ namespace Gruppe9.Controllers
         }
 
 
-        public IActionResult Index()
+        /* public IActionResult Index()
 {
     // ✅ Midlertidig: Dummydata
     var data = new List<IndexInfo>
@@ -47,10 +47,10 @@ namespace Gruppe9.Controllers
 
     ViewBag.Antall = data.Count;
     return View(data);
-}
+} */
 
 
-        /*    public IActionResult Index()
+           public IActionResult Index()
            {
                var data = _context.IndexInfo
                    .Include(i => i.ColorInfo)
@@ -59,7 +59,7 @@ namespace Gruppe9.Controllers
                ViewBag.Antall = data.Count;
 
                return View(data);
-           } */
+           }
 
 
         private ColorInfo GetColorForValue(int value)

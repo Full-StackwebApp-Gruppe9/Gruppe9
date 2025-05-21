@@ -6,7 +6,7 @@ namespace Gruppe9.Models
     public class PollenRegistrering
     {
         [Key]
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         [Required]
         public DateTime Date { get; set; }

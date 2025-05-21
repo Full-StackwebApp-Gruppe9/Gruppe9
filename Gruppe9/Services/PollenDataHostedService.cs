@@ -6,6 +6,7 @@ using Gruppe9.Models;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System;
 
 namespace Gruppe9.Services
 {
@@ -34,12 +35,25 @@ namespace Gruppe9.Services
 
             Console.WriteLine($"✅ API-data mottatt: {data.DailyInfo.Count} dager");
 
+            // Tøm tidligere data (kun for testing)
+            context.IndexInfo.RemoveRange(context.IndexInfo);
+            await context.SaveChangesAsync();
+
+            int antallLagret = 0;
+
             foreach (var day in data.DailyInfo)
             {
                 string dato = day.Date ?? "Ukjent";
+                int antallIndexes = day.Indexes?.Count ?? 0;
+
+                Console.WriteLine($"📅 Dato: {dato}, antall indexes: {antallIndexes}");
 
                 foreach (var index in day.Indexes)
                 {
+                    if (string.IsNullOrWhiteSpace(index.Code)) continue;
+
+                    Console.WriteLine($"🌿 {index.Code} – {index.DisplayName} – {index.Value}");
+
                     var color = index.Value switch
                     {
                         <= 2 => new ColorInfo { Red = 0, Green = 200, Blue = 0 },
@@ -64,16 +78,18 @@ namespace Gruppe9.Services
                         Value = index.Value,
                         Category = index.Category,
                         IndexDescription = index.IndexDescription,
-                        ColorInfoId = existingColor.Id,
-                        Date = dato // ✅ legg til dato
+                        ColorInfoId = existingColor.ID,
+                        Date = dato
                     };
 
                     context.IndexInfo.Add(indexInfo);
+                    Console.WriteLine($"➕ Lagret pollen: {index.Code} ({index.DisplayName}) - {index.Value} - {dato}");
+                    antallLagret++;
                 }
             }
 
             await context.SaveChangesAsync();
-            Console.WriteLine("✅ Pollen-data lagret i databasen!");
+            Console.WriteLine($"✅ Pollen-data lagret! Totalt: {antallLagret} rader.");
         }
 
         public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;

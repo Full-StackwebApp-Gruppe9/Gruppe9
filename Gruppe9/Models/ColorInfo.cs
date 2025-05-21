@@ -5,7 +5,7 @@ namespace Gruppe9.Models
     public class ColorInfo
     {
         [Key]
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         [Range(0, 255)]
         public int Red { get; set; }

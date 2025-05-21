@@ -34,7 +34,7 @@ namespace Gruppe9.Controllers
             }
 
             var pollenRegistrering = await _context.PollenRegistrering
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (pollenRegistrering == null)
             {
                 return NotFound();
@@ -88,7 +88,7 @@ namespace Gruppe9.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Date,TypeOfPollen,Level")] PollenRegistrering pollenRegistrering)
         {
-            if (id != pollenRegistrering.Id)
+            if (id != pollenRegistrering.ID)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace Gruppe9.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PollenRegistreringExists(pollenRegistrering.Id))
+                    if (!PollenRegistreringExists(pollenRegistrering.ID))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace Gruppe9.Controllers
             }
 
             var pollenRegistrering = await _context.PollenRegistrering
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (pollenRegistrering == null)
             {
                 return NotFound();
@@ -151,7 +151,7 @@ namespace Gruppe9.Controllers
 
         private bool PollenRegistreringExists(int id)
         {
-            return _context.PollenRegistrering.Any(e => e.Id == id);
+            return _context.PollenRegistrering.Any(e => e.ID == id);
         }
     }
 }

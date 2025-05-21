@@ -7,7 +7,7 @@ namespace Gruppe9.Models
     public class PlantInfo
     {
         [Key]
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         [Required]
         public string? PlanteType { get; set; }
