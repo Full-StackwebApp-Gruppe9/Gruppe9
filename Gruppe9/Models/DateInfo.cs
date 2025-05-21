@@ -10,7 +10,9 @@ namespace Gruppe9.Models
         public int Id { get; set; }
 
         [Required]
-        public DateTime Dato { get; set; }
+        public int Year { get; set; }
+        public int Month { get; set; }
+        public int Day { get; set; }
 
         // Navigasjon til alle responses på denne datoen
         public ICollection<PollenResponse>? PollenResponses { get; set; }

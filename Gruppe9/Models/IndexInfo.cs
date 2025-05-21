@@ -20,4 +20,7 @@ public class IndexInfo
     public string? IndexDescription { get; set; }
     [Required]
     public int ColorInfoId { get; set; }
+    [ForeignKey("ColorInfoId")]
+    public ColorInfo? ColorInfo { get; set; }
 }
+

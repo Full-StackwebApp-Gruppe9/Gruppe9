@@ -1,6 +1,37 @@
+@model List<Gruppe9.Models.IndexInfo>
+
 @{
     ViewData["Title"] = "Pollenvarsel";
 }
 
-<h1>Pollenvarsel fra API</h1>
-<p>Dette er en testside for visning av pollenvarsel.</p>
+<h1>Pollenvarsel for 5 dager</h1>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Code</th>
+            <th>DisplayName</th>
+            <th>Value</th>
+            <th>Category</th>
+            <th>IndexDescription</th>
+            <th>ColorInfo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            
+            <tr>
+                <td>@item.ID</td>
+                <td>@item.Code</td>
+                <td>@item.DisplayName</td>
+                <td>@item.Value</td>
+                <td>@item.Category</td>
+                <td>@item.IndexDescription</td>
+                <td style="background-color: rgb(@item.ColorInfo.Red, @item.ColorInfo.Green, @item.ColorInfo.Blue); width: 80px;">
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
