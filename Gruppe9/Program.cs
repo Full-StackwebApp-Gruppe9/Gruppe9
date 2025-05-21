@@ -3,8 +3,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Gruppe9.Data;
+using Gruppe9.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddHttpClient<IPollenAPIService, PollenAPIService>();
 
 // 💾 Legg til ApplicationDbContext og SQLite
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -12,6 +15,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 // 📦 MVC-støtte
 builder.Services.AddControllersWithViews();
+builder.Services.AddHostedService<PollenDataHostedService>();
+
 
 var app = builder.Build();
 

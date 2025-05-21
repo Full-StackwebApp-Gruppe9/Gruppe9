@@ -1,0 +1,37 @@
+using System.Text.Json.Serialization;
+
+namespace Gruppe9.Models
+{
+    public class ApiPollenResponse
+    {
+        [JsonPropertyName("dailyInfo")]
+        public List<ApiDateInfo> DailyInfo { get; set; } = new();
+    }
+
+    public class ApiDateInfo
+    {
+        [JsonPropertyName("date")]
+        public string Date { get; set; }
+
+        [JsonPropertyName("indexes")]
+        public List<ApiIndexInfo> Indexes { get; set; } = new();
+    }
+
+    public class ApiIndexInfo
+    {
+        [JsonPropertyName("code")]
+        public string? Code { get; set; }
+
+        [JsonPropertyName("displayName")]
+        public string? DisplayName { get; set; }
+
+        [JsonPropertyName("value")]
+        public int Value { get; set; }
+
+        [JsonPropertyName("category")]
+        public string Category { get; set; }
+
+        [JsonPropertyName("indexDescription")]
+        public string IndexDescription { get; set; }
+    }
+}

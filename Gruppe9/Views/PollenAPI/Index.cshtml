@@ -1,13 +1,23 @@
-@model List<Gruppe9.Models.IndexInfo>
+@model IEnumerable<Gruppe9.Models.IndexInfo>
 
 @{
-    ViewData["Title"] = "Pollenvarsel";
+    ViewData["Title"] = "Pollenvarsel for 5 dager";
 }
 
-<h1>Pollenvarsel for 5 dager</h1>
+<h2>@ViewData["Title"]</h2>
 
-<table class="table table-bordered table-striped">
-    <thead class="table-dark">
+@if (ViewBag.Feil != null)
+{
+    <div class="alert alert-danger">@ViewBag.Feil</div>
+}
+
+@if (ViewBag.Antall != null)
+{
+    <p><strong>Antall rader i databasen:</strong> @ViewBag.Antall</p>
+}
+
+<table class="table table-bordered table-dark">
+    <thead>
         <tr>
             <th>ID</th>
             <th>Code</th>
@@ -19,18 +29,16 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var index in Model)
         {
-            
             <tr>
-                <td>@item.ID</td>
-                <td>@item.Code</td>
-                <td>@item.DisplayName</td>
-                <td>@item.Value</td>
-                <td>@item.Category</td>
-                <td>@item.IndexDescription</td>
-                <td style="background-color: rgb(@item.ColorInfo?.Red, @item.ColorInfo?.Green, @item.ColorInfo?.Blue); width: 80px;">
-                </td>
+                <td>@index.ID</td>
+                <td>@index.Code</td>
+                <td>@index.DisplayName</td>
+                <td>@index.Value</td>
+                <td>@index.Category</td>
+                <td>@index.IndexDescription</td>
+                <td style="background-color: rgb(@index.ColorInfo?.Red, @index.ColorInfo?.Green, @index.ColorInfo?.Blue);"></td>
             </tr>
         }
     </tbody>

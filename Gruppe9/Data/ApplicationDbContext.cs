@@ -15,5 +15,8 @@ namespace Gruppe9.Data
         public DbSet<DateInfo> DateInfo { get; set; }
         public DbSet<PlantInfo> PlantInfo { get; set; }
         public DbSet<ColorInfo> ColorInfo { get; set; }
+
+        // ✅ Denne linjen manglet:
+        public DbSet<IndexInfo> IndexInfo { get; set; }
     }
 }
