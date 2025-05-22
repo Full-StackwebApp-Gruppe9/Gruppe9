@@ -1,13 +1,7 @@
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.DependencyInjection;
 using Gruppe9.Data;
-using Gruppe9.Services;
 using Gruppe9.Models;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using System;
 
+//Import rutine oppgave 2.5
 namespace Gruppe9.Services
 {
     public class PollenDataHostedService : IHostedService
