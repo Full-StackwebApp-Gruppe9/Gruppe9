@@ -3,21 +3,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Gruppe9.Models
 {
+    // Representerer en plante som måles i pollensystemet
     public class PlantInfo
     {
         [Key]
-        public int ID { get; set; }
+        public int ID { get; set; } // Primærnøkkel i databasen
 
         [Required]
-        public string? PlanteType { get; set; }
+        public string? PlanteType { get; set; } // Navn/type på planten
 
-        // FK til ColorInfo
-        public int ColorInfoId { get; set; }
+        public int ColorInfoId { get; set; } // Fremmednøkkel til tilknyttet farge
 
         [ForeignKey("ColorInfoId")]
-        public ColorInfo? ColorInfo { get; set; }
+        public ColorInfo? ColorInfo { get; set; } // Navigasjon til fargeinformasjon
 
-        // Navigasjon til alle responses for denne planten
-        public ICollection<PollenResponse>? PollenResponses { get; set; }
+        public ICollection<PollenResponse>? PollenResponses { get; set; } // Alle pollenregistreringer knyttet til planten
     }
 }

@@ -1,3 +1,4 @@
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Gruppe9.Data;
@@ -5,8 +6,10 @@ using Gruppe9.Models;
 
 namespace Gruppe9.Controllers
 {
+    // Kontroller for CRUD-operasjoner på PollenRegistrering-modellen
     public class PollenRegistreringController : Controller
     {
+        // Databasekontekst injiseres via dependency injection
         private readonly ApplicationDbContext _context;
 
         public PollenRegistreringController(ApplicationDbContext context)
@@ -15,12 +18,14 @@ namespace Gruppe9.Controllers
         }
 
         // GET: PollenRegistrering
+        // Viser liste over alle pollenregistreringer
         public async Task<IActionResult> Index()
         {
             return View(await _context.PollenRegistrering.ToListAsync());
         }
 
         // GET: PollenRegistrering/Details/5
+        // Viser detaljer for én spesifikk registrering basert på ID
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -39,14 +44,14 @@ namespace Gruppe9.Controllers
         }
 
         // GET: PollenRegistrering/Create
+        // Viser skjema for å opprette ny registrering
         public IActionResult Create()
         {
             return View();
         }
 
         // POST: PollenRegistrering/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Validerer og lagrer ny registrering i databasen
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Date,TypeOfPollen,Level")] PollenRegistrering pollenRegistrering)
@@ -61,6 +66,7 @@ namespace Gruppe9.Controllers
         }
 
         // GET: PollenRegistrering/Edit/5
+        // Henter eksisterende registrering og viser redigeringsskjema
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -77,8 +83,7 @@ namespace Gruppe9.Controllers
         }
 
         // POST: PollenRegistrering/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Validerer og oppdaterer eksisterende registrering
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Date,TypeOfPollen,Level")] PollenRegistrering pollenRegistrering)
@@ -97,13 +102,14 @@ namespace Gruppe9.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
+                    // Hvis dataen er endret/slettet av noen andre under redigering
                     if (!PollenRegistreringExists(pollenRegistrering.ID))
                     {
                         return NotFound();
                     }
                     else
                     {
-                        throw;
+                        throw; // Kast videre hvis det er en annen feil
                     }
                 }
                 return RedirectToAction(nameof(Index));
@@ -112,6 +118,7 @@ namespace Gruppe9.Controllers
         }
 
         // GET: PollenRegistrering/Delete/5
+        // Viser bekreftelsesside før sletting
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -130,6 +137,7 @@ namespace Gruppe9.Controllers
         }
 
         // POST: PollenRegistrering/Delete/5
+        // Utfører selve slettingen av registreringen
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -144,6 +152,7 @@ namespace Gruppe9.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // Hjelpemetode for å sjekke om en registrering finnes basert på ID
         private bool PollenRegistreringExists(int id)
         {
             return _context.PollenRegistrering.Any(e => e.ID == id);

@@ -4,37 +4,38 @@ using Gruppe9.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// 🔌 Registrerer HttpClient for API-tjenesten
 builder.Services.AddHttpClient<IPollenAPIService, PollenAPIService>();
 
-// 💾 Legg til ApplicationDbContext og SQLite
+// 💾 Konfigurerer ApplicationDbContext med SQLite
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite("Data Source=pollen.db"));  // Du kan endre filnavnet her hvis du vil
+    options.UseSqlite("Data Source=pollen.db")); // Lokal databasefil
 
-// 📦 MVC-støtte
+// 📦 Legger til støtte for MVC (kontrollere og views)
 builder.Services.AddControllersWithViews();
-builder.Services.AddHostedService<PollenDataHostedService>();
 
+// ⚙️ Registrerer bakgrunnstjenesten for automatisk dataimport
+builder.Services.AddHostedService<PollenDataHostedService>();
 
 var app = builder.Build();
 
-// 🌐 Middleware for ulike miljø
+// 🌐 Middleware for feilbehandling og sikkerhet i produksjon
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
-    app.UseHsts();
+    app.UseExceptionHandler("/Home/Error"); // Viser feilsider i produksjon
+    app.UseHsts(); // Bruker HTTP Strict Transport Security
 }
 
-app.UseHttpsRedirection();
-app.UseRouting();
+app.UseHttpsRedirection(); // Tvinger HTTPS
+app.UseRouting();          // Aktiverer ruting
+app.UseAuthorization();    // Legger til tilgangskontroll
 
-app.UseAuthorization();
-
-// 🧭 Ruting og statiske filer
+// 🧭 Kartlegger statiske filer og ruting
 app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
+    pattern: "{controller=Home}/{action=Index}/{id?}") // Standardrute
     .WithStaticAssets();
 
-app.Run();
+app.Run(); // Starter applikasjonen
