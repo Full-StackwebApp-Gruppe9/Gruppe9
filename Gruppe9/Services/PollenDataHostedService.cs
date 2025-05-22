@@ -1,5 +1,7 @@
 using Gruppe9.Data;
 using Gruppe9.Models;
+using Gruppe9.Helpers;
+
 
 //Import rutine oppgave 2.5
 namespace Gruppe9.Services
@@ -53,12 +55,7 @@ namespace Gruppe9.Services
 
                     Console.WriteLine($"🌿 {plant.Code} – {plant.DisplayName} – {index.Value}");
 
-                    var color = index.Value switch
-                    {
-                        <= 2 => new ColorInfo { Red = 0, Green = 200, Blue = 0 },
-                        <= 4 => new ColorInfo { Red = 255, Green = 255, Blue = 0 },
-                        _ => new ColorInfo { Red = 255, Green = 0, Blue = 0 }
-                    };
+                    var color = PollenColorHelper.GetColorForValue(index.Value);
 
                     var existingColor = context.ColorInfo.FirstOrDefault(c =>
                         c.Red == color.Red && c.Green == color.Green && c.Blue == color.Blue);
