@@ -14,52 +14,16 @@ namespace Gruppe9.Controllers
             _context = context;
         }
 
+        public async Task<IActionResult> Index()
+        {
+            var data = await _context.IndexInfo
+                .Include(i => i.ColorInfo)
+                .ToListAsync();
 
-        /* public IActionResult Index()
-{
-    // ✅ Midlertidig: Dummydata
-    var data = new List<IndexInfo>
-    {
-        new IndexInfo
-        {
-            ID = 1,
-            Code = "BIRCH",
-            DisplayName = "Bjørk",
-            Value = 2,
-            Category = "Low",
-            IndexDescription = "Lite bjørkepollen",
-            Date = "2025-05-21",
-            ColorInfo = new ColorInfo { Red = 0, Green = 200, Blue = 0 }
-        },
-        new IndexInfo
-        {
-            ID = 2,
-            Code = "GRASS",
-            DisplayName = "Gress",
-            Value = 5,
-            Category = "High",
-            IndexDescription = "Høyt nivå av gresspollen",
-            Date = "2025-05-21",
-            ColorInfo = new ColorInfo { Red = 255, Green = 0, Blue = 0 }
+            ViewBag.Antall = data.Count;
+
+            return View(data);
         }
-    };
-
-    ViewBag.Antall = data.Count;
-    return View(data);
-} */
-
-
-           public IActionResult Index()
-           {
-               var data = _context.IndexInfo
-                   .Include(i => i.ColorInfo)
-                   .ToList();
-
-               ViewBag.Antall = data.Count;
-
-               return View(data);
-           }
-
 
         private ColorInfo GetColorForValue(int value)
         {
