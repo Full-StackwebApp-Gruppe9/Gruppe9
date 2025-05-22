@@ -25,7 +25,7 @@ namespace Gruppe9.Services
             string url = $"{_baseUrl}?location.latitude=59.26754&location.longitude=10.40762&days=5&key={_apiKey}";
 
             //New York
-            // string url = $"{_baseUrl}?location.latitude=40.7128&location.longitude=-74.0060&days=5&key={_apiKey}";
+            //string url = $"{_baseUrl}?location.latitude=40.7128&location.longitude=-74.0060&days=5&key={_apiKey}";
 
             //Karleby, Finland
             //string url = $"{_baseUrl}?location.latitude=59.26754&location.longitude=10.40762&days=5&key={_apiKey}";

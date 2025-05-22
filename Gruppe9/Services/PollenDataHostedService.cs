@@ -48,6 +48,10 @@ namespace Gruppe9.Services
 
                 Console.WriteLine($"📅 Dato: {dato}, antall planter: {antallPlanter}");
 
+                // 🔒 Sjekk for null før foreach
+                if (day.PlantInfo == null)
+                    continue;
+
                 foreach (var plant in day.PlantInfo)
                 {
                     var index = plant.IndexInfo;

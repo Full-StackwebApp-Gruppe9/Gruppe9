@@ -31,11 +31,4 @@ body {
 }
 
 
-body {
-    background-image: url('/images/skog.jpg');
-    background-size: cover;          /* Strekk bildet over hele siden */
-    background-repeat: no-repeat;    /* Ikke gjenta bildet */
-    background-position: center;     /* Midtstill bildet */
-    background-attachment: fixed;    /* Hold bildet i ro når man scroller */
-    color: white;                    /* Gjør tekst lesbar hvis nødvendig */
-}
+

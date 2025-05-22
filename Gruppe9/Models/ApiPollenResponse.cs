@@ -17,7 +17,7 @@ namespace Gruppe9.Models
         public string? Date { get; set; }
 
         [JsonPropertyName("plantInfo")]
-        public List<ApiPlantInfo> PlantInfo { get; set; } = new();
+        public List<ApiPlantInfo>? PlantInfo { get; set; } = new();
     }
 
     public class ApiIndexInfo
@@ -32,9 +32,9 @@ namespace Gruppe9.Models
         public int Value { get; set; }
 
         [JsonPropertyName("category")]
-        public string Category { get; set; }
+        public string? Category { get; set; }
 
         [JsonPropertyName("indexDescription")]
-        public string IndexDescription { get; set; }
+        public string? IndexDescription { get; set; }
     }
 }
