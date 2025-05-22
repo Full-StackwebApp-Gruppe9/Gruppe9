@@ -1,6 +1,5 @@
 using System.Text.Json.Serialization;
 using Gruppe9.Converters;
-using Gruppe9.Models;
 
 namespace Gruppe9.Models
 {

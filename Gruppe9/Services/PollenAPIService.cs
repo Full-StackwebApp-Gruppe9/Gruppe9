@@ -1,9 +1,5 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading.Tasks;
 using Gruppe9.Models;
-using System;
-using System.IO;
 using System.Text;
 
 namespace Gruppe9.Services

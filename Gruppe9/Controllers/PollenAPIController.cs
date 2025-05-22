@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using Gruppe9.Models;
 using Gruppe9.Data;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace Gruppe9.Controllers
 {
